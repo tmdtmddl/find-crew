@@ -1,7 +1,8 @@
 import { FormEvent, useCallback, useState } from "react";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import { jobDescs } from "../../constants";
+import { useSearchParams, useNavigate, useLocation } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
+import { jobDescs } from "../../constants";
+import useTextInput from "../../components/ui/useTextInput";
 
 export default function AuthPage() {
   const params = useSearchParams()[0].get("target");
@@ -15,44 +16,61 @@ export default function AuthPage() {
     return split.splice(0, 2) as TeamUserJob[];
   };
 
-  const [targets, setTargeta] = useState(extractor(params));
+  const [teamUser, setTeamUser] = useState(initialState);
+  const [targets, setTargets] = useState(extractor(params));
+
+  const content = useSearchParams()[0].get("content");
   const navi = useNavigate();
   const location = useLocation();
-  const content = useSearchParams()[0].get("content");
+
+  const Name = useTextInput();
+  const Email = useTextInput();
   const onSubmit = useCallback(
     (e: FormEvent) => {
       e.preventDefault();
       if (!content) {
         if (targets.length === 0) {
-          alert("찾으시는 직군을 선택해주세요");
+          alert("찾으시는 직군을 선택해주세요.");
           return;
         }
-        return navi(`${location}?context=기본정보`);
+        return navi(`${location.pathname}?content=기본정보`);
+      }
+
+      switch (content) {
+        case "기본정보":
+          return console.log("기본정보 ㄱㄱ");
       }
     },
-    [content, location, navi, targets]
+    [content, targets, navi, location]
   );
 
   return (
     <div>
-      <form className="border col gap-y-2.5" onSubmit={onSubmit}>
+      <form className="col border gap-y-2.5" onSubmit={onSubmit}>
         {!content ? (
           <div>
             <h1>어떤 직군을 영입하고 싶으신가요?</h1>
-            <p>여러직군을 선택하실 수 있습니다.</p>
-            <ul>
+            <p>여러 직군을 복수 선택할 수 있습니다.</p>
+            <ul className="wrap">
               {jobDescs.map((job) => {
                 const selected = targets.find((item) => item === job)
                   ? true
                   : false;
-                const onClick = () => {};
+                const onClick = () => {
+                  setTargets((prev) =>
+                    selected
+                      ? prev.filter((item) => item !== job)
+                      : [...prev, job]
+                  );
+                };
                 return (
                   <li key={job}>
                     <button
                       type="button"
+                      onClick={onClick}
                       className={twMerge(
                         "rounded-full bg-white border text-theme",
-                        selected && "primary bg-theme text-white "
+                        selected && "primary bg-theme text-white"
                       )}
                     >
                       {job}
@@ -66,18 +84,32 @@ export default function AuthPage() {
           {
             기본정보: (
               <>
-                <div>이름</div>
+                <div>
+                  <Name.Component
+                    label="이름"
+                    onChangeText={(name) =>
+                      setTeamUser((prev) => ({ ...prev, name }))
+                    }
+                    value={teamUser.name}
+                  />
+                </div>
                 <div>직군</div>
-                <div>이메일</div>
+                <Email.Component
+                  label="이메일"
+                  onChangeText={(email) =>
+                    setTeamUser((prev) => ({ ...prev, email }))
+                  }
+                  value={teamUser.email}
+                />
               </>
             ),
           }[content]
         )}
-        <div>
+        <div className="row gap-x-2.5">
           <button type="button" onClick={() => navi(-1)}>
             이전
           </button>
-          <button className="primary">다음</button>
+          <button className="primary px-5">다음</button>
         </div>
       </form>
     </div>
@@ -89,6 +121,8 @@ const initialState: TeamUser = {
   experiences: [],
   intro: "",
   jobDesc: "개발자",
-  moblie: "",
+  mobile: "010",
   name: "",
+  targets: [],
+  uid: "",
 };

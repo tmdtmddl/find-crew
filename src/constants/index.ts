@@ -27,7 +27,7 @@ export const homeDescs: HomeDesc[] = [
 
 export const jobDescs: TeamUserJob[] = [
   "개발자",
-  "공동대표자",
+  "공동대표",
   "기획자",
   "대표자",
   "디자이너",

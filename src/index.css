@@ -3,6 +3,7 @@
 @theme {
   --color-theme: var(--color-sky-500);
   --color-lightGray: var(--color-zinc-50);
+  --color-gray: var(--color-zinc-500);
   --color-border: var(--color-zinc-200);
   --color-bg: var(--color-white);
 }
@@ -35,6 +36,7 @@
   .col {
     @apply flex flex-col;
   }
+
   ul.wrap {
     @apply flex flex-wrap gap-2.5;
   }
