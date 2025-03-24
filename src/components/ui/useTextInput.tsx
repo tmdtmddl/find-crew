@@ -18,7 +18,7 @@ export interface TextInputProps {
     HTMLInputElement
   >;
 }
-
+// 커스텀훅
 const useTextInput = () => {
   const id = useId();
 
