@@ -1,109 +1,94 @@
-import { useSearchParams } from "react-router-dom";
-import { useRef, useState } from "react";
+import { FormEvent, useCallback, useState } from "react";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { jobDescs } from "../../constants";
 import { twMerge } from "tailwind-merge";
-import { isMobile } from "react-device-detect";
+
 export default function AuthPage() {
   const params = useSearchParams()[0].get("target");
-  const [x, setX] = useState(0);
-  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const extractor = (params: string | null) => {
+  const extractor = (params: string | null): TeamUserJob[] => {
     if (!params) {
       return [];
     }
     const copy = params.replace(",", "");
-    console.log(copy);
-    const split = params.split("");
-    return split.splice(0, 2);
+    const split = copy.split(" ");
+    return split.splice(0, 2) as TeamUserJob[];
   };
 
-  const targets = extractor(params);
-  const context = useSearchParams()[0].get("context");
-  const ref1 = useRef<HTMLDivElement>(null);
-  const ref2 = useRef<HTMLDivElement>(null);
-  const ref3 = useRef<HTMLDivElement>(null);
-  const ref4 = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const refs = [ref1, ref2, ref3, ref4];
-  const items = [1, 2, 3, 4];
+  const [targets, setTargeta] = useState(extractor(params));
+  const navi = useNavigate();
+  const location = useLocation();
+  const content = useSearchParams()[0].get("content");
+  const onSubmit = useCallback(
+    (e: FormEvent) => {
+      e.preventDefault();
+      if (!content) {
+        if (targets.length === 0) {
+          alert("찾으시는 직군을 선택해주세요");
+          return;
+        }
+        return navi(`${location}?context=기본정보`);
+      }
+    },
+    [content, location, navi, targets]
+  );
 
   return (
-    <div
-      className={twMerge(
-        "w-full h-screen   snap-mandatory ",
-        isMobile ? "snap-x  overflow-x-auto flex" : "snap-y overflow-y-auto"
-      )}
-    >
-      {isMobile && (
-        <div
-          className="fixed w-full top-[50%] left-0 translate-y-auto"
-          ref={containerRef}
-        >
-          <button
-            className="w-10 h-auto px-2.5 absolute bottom-0 left-0"
-            onClick={() => {
-              if (currentIndex === 0) {
-                return;
-              }
-              const index = currentIndex - 1;
-              setCurrentIndex(index);
-              return refs[index - 1].current?.scrollIntoView({
-                behavior: "smooth",
-              });
-            }}
-          >
+    <div>
+      <form className="border col gap-y-2.5" onSubmit={onSubmit}>
+        {!content ? (
+          <div>
+            <h1>어떤 직군을 영입하고 싶으신가요?</h1>
+            <p>여러직군을 선택하실 수 있습니다.</p>
+            <ul>
+              {jobDescs.map((job) => {
+                const selected = targets.find((item) => item === job)
+                  ? true
+                  : false;
+                const onClick = () => {};
+                return (
+                  <li key={job}>
+                    <button
+                      type="button"
+                      className={twMerge(
+                        "rounded-full bg-white border text-theme",
+                        selected && "primary bg-theme text-white "
+                      )}
+                    >
+                      {job}
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ) : (
+          {
+            기본정보: (
+              <>
+                <div>이름</div>
+                <div>직군</div>
+                <div>이메일</div>
+              </>
+            ),
+          }[content]
+        )}
+        <div>
+          <button type="button" onClick={() => navi(-1)}>
             이전
           </button>
-          <button
-            className="w-10 h-auto px-2.5 absolute bottom-0 right-0"
-            onClick={() => {
-              if (currentIndex === items.length - 1) {
-                return;
-              }
-              const index = currentIndex + 1;
-              setCurrentIndex(index);
-              console.log("show previouys slide");
-              return refs[index].current?.scrollIntoView({
-                behavior: "smooth",
-              });
-            }}
-          >
-            다음
-          </button>
+          <button className="primary">다음</button>
         </div>
-      )}
-      {items.map((item, index) => (
-        <div
-          key={item}
-          ref={refs[index]}
-          className={twMerge(
-            "min-w-full h-full border-2 snap-start text-white",
-            isMobile ? "bg-theme" : "bg-black"
-          )}
-          draggable
-          onDragStart={(e) => {
-            setCurrentIndex(index);
-            setX(e.clientX);
-            console.log("set curroentindex to ", index);
-          }}
-          onDragOver={(e) => {
-            const isBigger = x > e.clientX;
-            if (isBigger) {
-              console.log("show previouys slide");
-              return refs[index - 1].current?.scrollIntoView({
-                behavior: "smooth",
-              });
-            }
-            console.log("show next slider");
-            return refs[index - 1].current?.scrollIntoView({
-              behavior: "smooth",
-            });
-          }}
-        >
-          slide{item}
-        </div>
-      ))}
+      </form>
     </div>
   );
 }
+
+const initialState: TeamUser = {
+  email: "",
+  experiences: [],
+  intro: "",
+  jobDesc: "개발자",
+  moblie: "",
+  name: "",
+};
