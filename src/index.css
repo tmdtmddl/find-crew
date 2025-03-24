@@ -1,1 +1,32 @@
 @import "tailwindcss";
+
+@theme {
+  --color-theme: var(--color-sky-500);
+  --color-lightGray: var(--color-zinc-50);
+  --color-border: var(--color-zinc-200);
+  --color-bg: var(--color-white);
+}
+
+@layer base {
+  h1 {
+    @apply font-black text-2xl;
+  }
+  .p {
+    @apply font-light text-sm;
+  }
+  button {
+    @apply bg-lightGray rounded p-2.5 h-10 cursor-pointer active:scale-98 focus:opacity-80  active:opacity-50 transition duration-75;
+  }
+  button.sd {
+    @apply hover:shadow-md;
+  }
+  button.primary {
+    @apply bg-theme text-white;
+  }
+  .row {
+    @apply flex;
+  }
+  .col {
+    @apply flex flex-col;
+  }
+}
