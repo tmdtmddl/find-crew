@@ -17,7 +17,8 @@
     @apply font-light text-sm;
   }
 
-  button {
+  button,
+  a {
     @apply bg-lightGray rounded p-2.5 h-10 cursor-pointer active:scale-98 focus:opacity-80 active:opacity-50 transition duration-75 flex justify-center items-center;
   }
 
@@ -25,7 +26,7 @@
     @apply hover:shadow-md;
   }
 
-  button.primary {
+  .primary {
     @apply bg-theme text-white;
   }
 

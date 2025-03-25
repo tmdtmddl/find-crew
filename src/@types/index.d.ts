@@ -26,8 +26,16 @@ interface MonthYear {
   month: number;
   year: number;
 }
-
+//MothYear는 month랑year가 있음
 interface TeamUserExLength {
   start: MonthYear;
   end: "현재까지" | MonthYear;
 }
+//lenght는 start랑 end가 있는데 end는 현재까지라는 문자열 또는 MothYear라는 타입임
+
+interface AsyncResult<T = any> {
+  success?: boolean;
+  message?: string;
+  data?: T;
+}
+type PromiseResult<T = any> = Promise<AsyncResult<T>>;
