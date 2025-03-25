@@ -19,7 +19,7 @@ import { emailValidator } from "../../utils/validator";
 import ExForm from "./ExForm";
 import ExItem from "./ExItem";
 import { CgSpinner } from "react-icons/cg";
-import Loading from "../../components/Loading";
+import Loading from "../../components/Lodaing";
 import { AUTH } from "../../context/hooks";
 import { FcGoogle } from "react-icons/fc";
 
