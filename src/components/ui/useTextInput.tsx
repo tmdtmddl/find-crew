@@ -101,7 +101,7 @@ const useTextInput = () => {
         </div>
       );
     },
-    [id]
+    [id, focus]
   );
 
   return {

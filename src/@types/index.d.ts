@@ -38,4 +38,5 @@ interface AsyncResult<T = any> {
   message?: string;
   data?: T;
 }
+
 type PromiseResult<T = any> = Promise<AsyncResult<T>>;
