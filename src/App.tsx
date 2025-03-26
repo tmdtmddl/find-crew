@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AUTH } from "./context/hooks";
 import Loading from "./components/Lodaing";
 import { Suspense, lazy } from "react";
-// import UserWithChildern from "./components/Layout/UserWithChildern";
 import UserLayout from "./components/Layout/UserLayout";
 
 const HomePage = lazy(() => import("./app/Home/page"));
@@ -10,9 +9,11 @@ const AuthPage = lazy(() => import("./app/Auth/page"));
 const LoginPage = lazy(() => import("./app/Login/page"));
 const MyPage = lazy(() => import("./app/My/page"));
 const AccountPage = lazy(() => import("./app/My/Account/page"));
-const FindPage = lazy(() => import("./app/find/page"));
-const FindDetailPage = lazy(() => import("./app/find/[id]/page"));
-const NewMatchingTeam = lazy(() => import("./app/find/NewMatchingTeam/page"));
+const FindPage = lazy(() => import("./app/Find/page"));
+const FindDetailPage = lazy(() => import("./app/Find/[id]/page"));
+const NewMatchingTeamPage = lazy(
+  () => import("./app/Find/NewMatchingTeam/page")
+);
 
 export default function App() {
   const { initialized, user } = AUTH.use();
@@ -38,7 +39,7 @@ export default function App() {
                 {user && (
                   <Route
                     path="matching-teams"
-                    element={<NewMatchingTeam {...user} />}
+                    element={<NewMatchingTeamPage {...user} />}
                   />
                 )}
               </Route>

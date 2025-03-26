@@ -45,13 +45,17 @@ const UserLayout = ({ user }: { user: TeamUser | null }) => {
           >
             <h1>{user ? `${user.name}님 안녕하세요!` : "팀매칭앱"}</h1>
           </Link>
-          {pathname === "/find" && <button>공고등록</button>}
-          <button
-            onClick={() => setIsMenuShowing((prev) => !prev)}
-            className="w-10"
-          >
-            {isMenuShowing ? <AiOutlineClose /> : <AiOutlineMenu />}
-          </button>
+          <div className="row gap-x-2.5">
+            {pathname === "/find" && (
+              <Link to="/find/matching-teams">공고등록</Link>
+            )}
+            <button
+              onClick={() => setIsMenuShowing((prev) => !prev)}
+              className="w-10"
+            >
+              {isMenuShowing ? <AiOutlineClose /> : <AiOutlineMenu />}
+            </button>
+          </div>
         </div>
       </header>
 

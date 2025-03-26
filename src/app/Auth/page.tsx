@@ -12,7 +12,7 @@ import useSelect from "../../components/ui/useSelect";
 import { emailValidator } from "../../utils/validator";
 import ExForm from "./ExForm";
 import ExItem from "./ExItem";
-import Loading from "../../components/Loading";
+import Loading from "../../components/Lodaing";
 import { AUTH } from "../../context/hooks";
 import { FcGoogle } from "react-icons/fc";
 import { PROVIDER } from "../../context/zustand.store";

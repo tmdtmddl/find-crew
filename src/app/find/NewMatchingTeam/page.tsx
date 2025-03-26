@@ -3,11 +3,7 @@ import MatchingForm from "./MatchingForm";
 const NewMatchingTeam = (user: TeamUser) => {
   return (
     <div>
-      <MatchingForm
-        onCancle={() => {
-          console.log("dfd");
-        }}
-      />
+      <MatchingForm onCancel={() => console.log("취소 ㄱㄱ")} />
     </div>
   );
 };
