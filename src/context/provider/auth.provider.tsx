@@ -67,7 +67,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
   );
 
   const signin = useCallback(
-    (email: string, password: string): PromiseResult =>
+    (email: string, password: string): PromiseResult<firebase.User> =>
       new Promise((resolve) =>
         startTransition(async () => {
           try {
@@ -78,6 +78,15 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
             if (!result.user) {
               return resolve({ message: "No Such User" });
             }
+            const snap = await ref.doc(result.user.uid).get();
+            const data = snap.data() as TeamUser;
+            if (!data) {
+              return resolve({
+                message: "통합회원입니다. 간략한 정보를 입력해주세요.",
+                data: result.user,
+              });
+            }
+
             // await fetchUser(result.user.uid);
             resolve({ success: true });
           } catch (error: any) {
@@ -108,7 +117,10 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
               id = uid;
             }
 
-            await ref.doc(id).set({ ...newUser, uid: id } as TeamUser);
+            const updatedUser: TeamUser = { ...newUser, uid: id };
+            await ref.doc(id).set(updatedUser);
+            setUser(updatedUser);
+
             resolve({ success: true });
           } catch (error: any) {
             resolve(error);
@@ -130,12 +142,15 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
             if (!result.user) {
               return resolve({ message: "No such User" });
             }
+            //인증끝내고 데이터베이스에 저장
             const snap = await ref.doc(result.user.uid).get();
             const data = snap.data() as TeamUser;
+            //회원이 있으면
             if (data) {
               setUser(data);
               return resolve({
                 message: "통합회원입니다. 기본정보를 입력해주세요.",
+                success: true,
               });
             }
 

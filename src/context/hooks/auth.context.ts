@@ -6,14 +6,14 @@ export interface Props {
   initialized: boolean;
   isPending: boolean;
 
-  signin: (email: string, password: string) => PromiseResult;
+  signin: (email: string, password: string) => PromiseResult<firebase.User>;
   signout: () => PromiseResult;
   signup: (user: TeamUser, password: string, uid?: string) => PromiseResult;
 
   updateUser: (newUser: TeamUser) => PromiseResult;
   signinWithProvider: () => PromiseResult<firebase.User>;
 }
-
+//초기값 정하기
 export const initialState: Props = {
   initialized: false,
   isPending: false,
