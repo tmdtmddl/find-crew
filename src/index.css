@@ -42,3 +42,17 @@
     @apply flex flex-wrap gap-2.5;
   }
 }
+
+@layer components {
+  .modal {
+    @apply fixed top-0 left-0 w-full h-screen;
+  }
+
+  .modal-bg {
+    @apply absolute top-0 left-0 w-full h-full;
+  }
+
+  .modal-content {
+    @apply relative z-10;
+  }
+}

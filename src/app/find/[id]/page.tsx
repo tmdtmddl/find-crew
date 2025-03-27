@@ -4,7 +4,7 @@ import FindItem from "../FindItem";
 import { useQuery } from "@tanstack/react-query";
 import { db, FBCollection } from "../../../lib/firebase";
 import Loading from "../../../components/Lodaing";
-import { useCallback, useTransition } from "react";
+import { useCallback, useState, useTransition } from "react";
 import { AUTH } from "../../../context/hooks";
 
 const FindDetailPage = () => {
@@ -32,6 +32,7 @@ const FindDetailPage = () => {
   });
 
   const [isLoading, startTransition] = useTransition();
+  const [message, setMessage] = useState("");
 
   const { user } = AUTH.use();
 
@@ -39,12 +40,16 @@ const FindDetailPage = () => {
 
   const onStart = useCallback(() => {
     startTransition(async () => {
+      setMessage("공고를 스크랩중입니다.");
       if (!user) {
         if (confirm("로그인이 필요한 기능입니다. 로그인 하시겠습니까?")) {
           navi("/login");
           return;
         }
         return;
+      }
+      if (user.uid === data?.uid) {
+        return alert("자신의 공고입니다.");
       }
 
       try {
@@ -82,6 +87,9 @@ const FindDetailPage = () => {
           return;
         }
         return;
+      }
+      if (user.uid === data?.uid) {
+        return alert("자신의 공고입니다.");
       }
 
       try {
@@ -129,7 +137,48 @@ const FindDetailPage = () => {
 
   return (
     <div className="p-5">
-      <div>{data && <FindItem item={data} isFull />}</div>
+      {isLoading && <Loading message={message} />}
+      {data && (
+        <div>
+          {user?.uid === data.uid && (
+            <div className="row gap-x-2.5 justify-end mb-2.5">
+              <button
+                className="hover:text-theme"
+                onClick={() => {
+                  setTeam(data);
+                  navi("/find/matching-teams");
+                }}
+              >
+                수정
+              </button>
+              <button
+                className="hover:text-red-500"
+                onClick={() => {
+                  if (confirm("해당 공고를 삭제하시겠습니까?")) {
+                    startTransition(async () => {
+                      setMessage("공고를 삭제중입니다.");
+                      try {
+                        const ref = db
+                          .collection(FBCollection.MATCHING)
+                          .doc(data.id);
+                        await ref.delete();
+                        alert("공고가 삭제되었습니다.");
+                        navi("/find");
+                        setTeam(null);
+                      } catch (error: any) {
+                        return alert(error.message);
+                      }
+                    });
+                  }
+                }}
+              >
+                삭제
+              </button>
+            </div>
+          )}
+          <FindItem item={data} isFull />
+        </div>
+      )}
       <div className="row gap-x-2.5 mt-5">
         <button onClick={onStart} className="primary">
           팀 매칭 시작하기

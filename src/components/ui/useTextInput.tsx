@@ -50,12 +50,14 @@ const useTextInput = () => {
     }: TextInputProps) => {
       return (
         <div className={twMerge("col gap-y-1", divClassName)}>
-          <label
-            htmlFor={id}
-            className={twMerge("text-gray text-sm", labelClassName)}
-          >
-            {label}
-          </label>
+          {label.length > 0 && (
+            <label
+              htmlFor={id}
+              className={twMerge("text-gray text-sm", labelClassName)}
+            >
+              {label}
+            </label>
+          )}
           <div className="relative">
             {!resetHidden && (
               <AiOutlineCloseCircle

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { db, FBCollection } from "../../lib/firebase";
 import Loading from "../../components/Lodaing";
-import { teams } from "../../constants";
+// import { teams } from "../../constants";
 import { Link } from "react-router-dom";
 
 const Team = (user: TeamUser) => {
@@ -45,14 +45,23 @@ const Team = (user: TeamUser) => {
   }
 
   return (
-    <div>
+    <div className="p-5">
       <h1>매칭 진행 중인 팀 {data.length}개</h1>
-      <ul>
+      <ul className="col gap-y-2.5 my-5">
         {data.map((team) => (
           <li key={team.id}>
-            {team.name}
-            {team.members.length}명의 멤버
-            {team.targets.length}의 직군을 구함
+            <Link
+              to={
+                `/find/${team.id}/chat${team.uid === user.uid ? "" : user.uid}`
+
+                // team.uid === user.uid
+                //   ? `/find/${team.id}/chat`
+                //   : `/find/${team.id}/chat?cid=${user.uid}`
+              }
+            >
+              <b>[{team.name}]</b>
+              {team.targets.length}개의 직군을 찾고 있음
+            </Link>
           </li>
         ))}
       </ul>
