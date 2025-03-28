@@ -77,7 +77,10 @@ const ChatPage = (user: TeamUser) => {
       subMessages;
       return subMessages;
     }
-  }, [params.id, ref, cid]);
+  }, [params.id, cid]);
+
+  //ref문제인가???????? 콘솔에 왜 계속 출력이되지??????
+  console.log(ref);
 
   // useEffect(() => {
   //   if (texts.length !== length) {
