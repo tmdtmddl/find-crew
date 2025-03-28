@@ -18,6 +18,7 @@ const ChatPage = (user: TeamUser) => {
   const { team } = TEAM.store();
 
   const ref = db.collection(FBCollection.MATCHING).doc(params.id);
+  console.log(ref);
 
   const { isPending, error, data } = useQuery({
     queryKey: ["teams", params.id],
