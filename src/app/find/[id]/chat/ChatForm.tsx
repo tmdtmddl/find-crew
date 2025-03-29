@@ -42,6 +42,7 @@ const ChatForm = ({ myUid, uid, id, cid, onFocus }: Props) => {
       return alert(error.message);
     }
   }, [message, uid, myUid, Message, id, cid, onFocus]);
+
   return (
     <AppForm
       className="flex-row gap-x-2.5 max-w-auto w-full"

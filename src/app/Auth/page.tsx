@@ -6,7 +6,7 @@ import {
   Link,
 } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
-import { jobDescs } from "../../constants";
+import { jobDescs, teams } from "../../constants";
 import useTextInput from "../../components/ui/useTextInput";
 import useSelect from "../../components/ui/useSelect";
 import { emailValidator } from "../../utils/validator";

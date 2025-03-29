@@ -52,7 +52,9 @@ const Team = (user: TeamUser) => {
           <li key={team.id}>
             <Link
               to={
-                `/find/${team.id}/chat${team.uid === user.uid ? "" : user.uid}`
+                `/find/${team.id}/chat?cid=${
+                  team.uid === user.uid ? "" : user.uid
+                }`
 
                 // team.uid === user.uid
                 //   ? `/find/${team.id}/chat`

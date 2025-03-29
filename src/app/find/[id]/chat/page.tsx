@@ -18,6 +18,7 @@ const ChatPage = (user: TeamUser) => {
   const { team } = TEAM.store();
 
   const ref = db.collection(FBCollection.MATCHING).doc(params.id);
+  // console.log(ref);
 
   const { isPending, error, data } = useQuery({
     queryKey: ["teams", params.id],
@@ -46,7 +47,10 @@ const ChatPage = (user: TeamUser) => {
 
   const cid = useSearchParams()[0].get("cid");
 
+  // console.log(cid);
+
   const navi = useNavigate();
+
   const { pathname } = useLocation();
 
   const [texts, setTexts] = useState<Chat[]>([]);
@@ -76,9 +80,13 @@ const ChatPage = (user: TeamUser) => {
         });
 
       subMessages;
-      return subMessages;
+      subMessages;
     }
-  }, [params.id, ref, cid]);
+  }, [params.id, cid]);
+  // console.log(cid);
+
+  //ref문제인가???????? 콘솔에 왜 계속 출력이되지??????
+  console.log(ref);
 
   // useEffect(() => {
   //   if (texts.length !== length) {
