@@ -45,6 +45,7 @@ const ChatPage = (user: TeamUser) => {
   }, [data?.uid, user.uid]);
 
   const cid = useSearchParams()[0].get("cid");
+
   const navi = useNavigate();
   const { pathname } = useLocation();
 
@@ -53,7 +54,7 @@ const ChatPage = (user: TeamUser) => {
   const listRef = useRef<HTMLLIElement>(null);
   const onFocus = useCallback(
     () => setTimeout(() => listRef.current?.scrollIntoView(), 100),
-    []
+    [listRef]
   );
 
   useEffect(() => {

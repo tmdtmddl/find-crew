@@ -225,6 +225,7 @@ export default function AuthPage() {
       setTeamUser((prev) => ({ ...prev, name: name ?? "", email }));
     }
   }, [isWithProvider, name, email]);
+
   return (
     <div>
       {isPending && <Loading message="회원가입이 진행중입니다..." />}
