@@ -232,6 +232,7 @@ export default function AuthPage() {
       {isPending && <Loading message="회원가입이 진행중입니다..." />}
       <form className="col gap-y-2.5 p-5 max-w-100 mx-auto" onSubmit={onSubmit}>
         {!content ? (
+          // content가 없을 때
           <div>
             <h1>어떤 직군을 영입하고 싶으신가요?</h1>
             <p>여러 직군을 복수 선택할 수 있습니다.</p>
@@ -265,8 +266,10 @@ export default function AuthPage() {
             </ul>
           </div>
         ) : (
+          // content가 있을 때
           {
             기본정보: (
+              // content가 기본정보일 때
               <>
                 <div className="row gap-x-2.5">
                   <Name.Component
@@ -350,6 +353,7 @@ export default function AuthPage() {
               </>
             ),
             경력: (
+              //content가 경력일 때
               <>
                 <div className="col">
                   <label htmlFor="ex-form" className="text-sm text-gray-500">
@@ -415,6 +419,7 @@ export default function AuthPage() {
               </>
             ),
             자소서: (
+              // content가 자소서일때
               <div className="col gap-y-1">
                 <label htmlFor="intro" className="text-gray-500 text-sm">
                   자기소개
@@ -430,6 +435,7 @@ export default function AuthPage() {
               </div>
             ),
           }[content]
+          // 객체에서 동적으로 값을 가져오는 방식
         )}
         <div className="row gap-x-2.5 mt-2.5">
           <button type="button" className="flex-1" onClick={() => navi(-1)}>
