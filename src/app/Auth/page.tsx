@@ -40,6 +40,7 @@ export default function AuthPage() {
   const [isInsertingEx, setIsInsertingEx] = useState(false);
 
   const content = useSearchParams()[0].get("content");
+  console.log(content);
   const navi = useNavigate();
   const location = useLocation();
 
