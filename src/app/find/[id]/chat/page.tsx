@@ -17,7 +17,12 @@ const ChatPage = (user: TeamUser) => {
 
   const { team } = TEAM.store();
 
-  const ref = db.collection(FBCollection.MATCHING).doc(params.id);
+  const ref = useMemo(() => {
+    return db.collection(FBCollection.MATCHING).doc(params.id);
+  }, [params.id]);
+
+  // const ref = db.collection(FBCollection.MATCHING).doc(params.id);
+
   // console.log(ref);
 
   const { isPending, error, data } = useQuery({
@@ -80,9 +85,9 @@ const ChatPage = (user: TeamUser) => {
         });
 
       subMessages;
-      subMessages;
+      return subMessages;
     }
-  }, [params.id, cid]);
+  }, [params.id, ref, cid]);
   // console.log(cid);
 
   //ref문제인가???????? 콘솔에 왜 계속 출력이되지??????
