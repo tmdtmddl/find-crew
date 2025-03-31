@@ -11,8 +11,10 @@ export interface Props {
   signup: (user: TeamUser, password: string, uid?: string) => PromiseResult;
 
   updateUser: (newUser: TeamUser) => PromiseResult;
+  updataUserDetail: (terget: keyof TeamUser, value: any) => PromiseResult;
   signinWithProvider: () => PromiseResult<firebase.User>;
 }
+
 //초기값 정하기
 export const initialState: Props = {
   initialized: false,
@@ -22,6 +24,7 @@ export const initialState: Props = {
   signup: async () => ({}),
   updateUser: async () => ({}),
   signinWithProvider: async () => ({}),
+  updataUserDetail: async () => ({}),
   user: null,
 };
 

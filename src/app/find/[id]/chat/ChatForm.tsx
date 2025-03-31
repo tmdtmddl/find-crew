@@ -9,9 +9,10 @@ interface Props {
   id: string;
   cid: string;
   onFocus: () => void;
+  isFinished?: boolean;
 }
 
-const ChatForm = ({ myUid, uid, id, cid, onFocus }: Props) => {
+const ChatForm = ({ myUid, uid, id, cid, onFocus, isFinished }: Props) => {
   const [message, setMessage] = useState("");
   const Message = useTextInput();
 
@@ -42,12 +43,20 @@ const ChatForm = ({ myUid, uid, id, cid, onFocus }: Props) => {
       return alert(error.message);
     }
   }, [message, uid, myUid, Message, id, cid, onFocus]);
-
   return (
     <AppForm
-      className="flex-row gap-x-2.5 max-w-auto w-full"
+      className="flex-row gap-x-2.5 max-w-auto w-full relative"
       onSubmit={onSubmit}
     >
+      {isFinished && (
+        <button
+          type="button"
+          className="absolute w-full h-full top-0 left-0 z-10"
+          onClick={() => alert("해당 공고는 모집 종료되었습니다.")}
+        >
+          모집 종료
+        </button>
+      )}
       <Message.Component
         value={message}
         onChangeText={setMessage}

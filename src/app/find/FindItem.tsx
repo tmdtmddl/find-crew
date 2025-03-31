@@ -3,10 +3,9 @@ import { TEAM } from "../../context/zustand.store";
 
 const FindItem = ({
   item,
-  index,
   isFull,
 }: ItemProps<MatchingTeam> & { isFull?: boolean }) => {
-  const { name, descs, intro, members, targets } = item;
+  const { name, descs, intro, members, targets, isFinished } = item;
   const { setTeam } = TEAM.store();
 
   return (
@@ -15,7 +14,10 @@ const FindItem = ({
       className="col gap-y-1 border border-border p-2.5 rounded-md hover:shadow-md h-auto block bg-white"
       onClick={() => setTeam(item)}
     >
-      <h1 className="text-xl">{name}</h1>
+      <h1 className="text-xl">
+        {isFinished ? `[모집종료] ` : "[모집중] "}
+        {name}
+      </h1>
       <p>{members.length}명의 멤버로 이루어진 팀입니다.</p>
       <p>{intro}</p>
       {isFull && (

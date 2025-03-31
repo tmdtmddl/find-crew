@@ -64,7 +64,7 @@ const LoginPage = () => {
         return alert(message ?? "로그인 문제 생김");
       }
       alert("환영합니다. 나의 동료를 찾으세요!");
-      navi("/my");
+      navi("/my?content=matching");
     } catch (error: any) {
       alert(error.message);
     }

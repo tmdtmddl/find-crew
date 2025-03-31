@@ -17,13 +17,7 @@ const ChatPage = (user: TeamUser) => {
 
   const { team } = TEAM.store();
 
-  const ref = useMemo(() => {
-    return db.collection(FBCollection.MATCHING).doc(params.id);
-  }, [params.id]);
-
-  // const ref = db.collection(FBCollection.MATCHING).doc(params.id);
-
-  // console.log(ref);
+  const ref = db.collection(FBCollection.MATCHING).doc(params.id);
 
   const { isPending, error, data } = useQuery({
     queryKey: ["teams", params.id],
@@ -51,8 +45,6 @@ const ChatPage = (user: TeamUser) => {
   }, [data?.uid, user.uid]);
 
   const cid = useSearchParams()[0].get("cid");
-
-  // console.log(cid);
 
   const navi = useNavigate();
 
@@ -87,10 +79,9 @@ const ChatPage = (user: TeamUser) => {
       subMessages;
       return subMessages;
     }
-  }, [params.id, ref, cid]);
-  // console.log(cid);
+  }, [params.id, cid]);
+  // 의존성어레이에 ref도 추가해야하지만 파이어베이스가 터져서 우선 빼놈
 
-  //ref문제인가???????? 콘솔에 왜 계속 출력이되지??????
   console.log(ref);
 
   // useEffect(() => {
@@ -129,11 +120,18 @@ const ChatPage = (user: TeamUser) => {
   if (isAdmin && !cid) {
     return (
       <div>
-        {data.fid.map((cid) => (
-          <button key={cid} onClick={() => navi(`${pathname}?cid=${cid}`)}>
-            {cid} 님과의 상담
-          </button>
-        ))}
+        <h1>
+          {data.name} - {data.targets.length}개의 직군 구함
+        </h1>
+        {data.fid.length > 0 ? (
+          data.fid.map((cid) => (
+            <button key={cid} onClick={() => navi(`${pathname}?cid=${cid}`)}>
+              {cid} 님과의 상담
+            </button>
+          ))
+        ) : (
+          <p>해당 공고를 스크랩한 유저가 존재하지 않습니다.</p>
+        )}
       </div>
     );
   }
@@ -176,6 +174,7 @@ const ChatPage = (user: TeamUser) => {
         cid={cid!}
         id={data.id}
         onFocus={onFocus}
+        isFinished={data?.isFinished}
       />
     </div>
   );

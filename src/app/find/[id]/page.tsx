@@ -41,6 +41,9 @@ const FindDetailPage = () => {
   const onStart = useCallback(() => {
     startTransition(async () => {
       setMessage("공고를 스크랩중입니다.");
+      if (!data) {
+        return;
+      }
       if (!user) {
         if (confirm("로그인이 필요한 기능입니다. 로그인 하시겠습니까?")) {
           navi("/login");
@@ -57,7 +60,8 @@ const FindDetailPage = () => {
           .collection(FBCollection.USERS)
           .doc(user.uid)
           .collection(FBCollection.MY)
-          .doc(data?.id);
+          .doc(data.id);
+        const postRef = db.collection(FBCollection.MATCHING).doc(data.id);
 
         const snap = await ref.get();
         const doc = snap.data();
@@ -65,7 +69,10 @@ const FindDetailPage = () => {
           return alert("이미 스크랩한 공고입니다.");
         }
 
-        await ref.set({ ...data, fid: user.uid });
+        const newPost = { ...data, fid: [...data.fid, user.uid] };
+
+        await ref.set(newPost);
+        await postRef.set(newPost);
         if (
           confirm(
             '공고를 스크랩했습니다. "나의 매칭 진행중 팀" 에서 확인할 수 있습니다. 지금 확인하시겠습니까?'
@@ -107,7 +114,7 @@ const FindDetailPage = () => {
 
         await ref.add(newMessage);
         alert("문의를 시작합니다.");
-        navi(`/find/${data?.id}/chat`);
+        navi(`/find/${data?.id}/chat?cid=${user.uid}`);
         setTeam(data);
       } catch (error: any) {
         return alert(error.message);
@@ -184,6 +191,7 @@ const FindDetailPage = () => {
           팀 매칭 시작하기
         </button>
         <button onClick={onChat}>문의하기</button>
+        <button onClick={() => console.log(data)}>확인</button>
       </div>
     </div>
   );
