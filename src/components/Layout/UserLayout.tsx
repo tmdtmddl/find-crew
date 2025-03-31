@@ -33,7 +33,7 @@ const UserLayout = ({ user }: { user: TeamUser | null }) => {
     <>
       <header
         className={twMerge(
-          "relative z-50 bg-white/90",
+          "relative z-50 bg-white/90 border-b border-border",
           pathname !== "/" ? "relative" : "fixed top-0 left-0 w-full"
         )}
       >

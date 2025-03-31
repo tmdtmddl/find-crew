@@ -14,14 +14,13 @@ interface TeamItemProps {
 const TeamItem = ({ item, user }: TeamItemProps) => {
   const isMyPost = useMemo(() => item.uid === user.uid, [item.uid, user.uid]);
 
-  const [fUsers, setFUsers] = useState(item?.fusers ?? []);
+  const [fUsers, setFUsers] = useState(item.fusers ?? []);
 
   const Users = useSelect();
 
   const [isPending, startTransition] = useTransition();
 
   const queryClient = useQueryClient();
-
   const cachingFn = useCallback(
     () =>
       queryClient.invalidateQueries({
@@ -36,7 +35,7 @@ const TeamItem = ({ item, user }: TeamItemProps) => {
       action,
     }: {
       payload: MatchingTeam;
-      action: "CREATE" | "UPDATE" | "DELETE";
+      action: MutationAction;
     }) => {
       const ref = db.collection(FBCollection.MATCHING);
       try {
@@ -49,51 +48,53 @@ const TeamItem = ({ item, user }: TeamItemProps) => {
               ...payload,
               tid: [...payload.members.map((user) => user.uid), ...fUsers],
             });
+
           alert("공고를 종료하였습니다.");
         } else if (action === "CREATE") {
-          //   const result = await ref.add(payload);
+          //   return console.log(payload);
+          const result = await ref.add(payload);
           await db
             .collection(FBCollection.USERS)
             .doc(user.uid)
-            .collection(FBCollection.MYTEAM)
-            .doc(item.id)
-            .set(item);
-
-          alert("재공고");
+            .collection(FBCollection.MY)
+            .doc(result.id)
+            .set({ ...payload, id: result.id });
+          alert("공고를 재 등록하였습니다.");
         } else {
           if (isMyPost) {
             await ref.doc(payload.id).delete();
-            await db
-              .collection(FBCollection.USERS)
-              .doc(user.uid)
-              .collection(FBCollection.MY)
-              .doc(payload.id)
-              .delete();
           } else {
             await ref
               .doc(payload.id)
               .update({ fid: payload.fid.filter((item) => item !== user.uid) });
           }
-          alert("삭제됨");
+          await db
+            .collection(FBCollection.USERS)
+            .doc(user.uid)
+            .collection(FBCollection.MY)
+            .doc(payload.id)
+            .delete();
         }
+        alert("삭제되었습니다.");
       } catch (error: any) {
         return error;
       }
     },
     onError: (err) => console.log(err),
-    onSuccess: () => cachingFn(),
+    onSuccess: () => {
+      cachingFn();
+      console.log("re-fecth query Fn");
+    },
   });
 
-  const onEnd = useCallback(
-    () =>
-      startTransition(async () => {
-        await mutation.mutateAsync({
-          action: "UPDATE",
-          payload: { ...item, isFinished: true, fusers: fUsers },
-        });
-      }),
-    [fUsers, item, mutation]
-  );
+  const onEnd = useCallback(() => {
+    startTransition(async () => {
+      mutation.mutateAsync({
+        action: "UPDATE",
+        payload: { ...item, isFinished: true, fusers: fUsers },
+      });
+    });
+  }, [item, fUsers, mutation]);
 
   const onRepost = useCallback(() => {
     const newPost = {
@@ -111,7 +112,6 @@ const TeamItem = ({ item, user }: TeamItemProps) => {
         payload: newPost,
       });
     });
-    alert("해당공고를 재공고 했습니다.");
   }, [item, mutation]);
 
   const onDelete = useCallback(() => {
@@ -132,12 +132,10 @@ const TeamItem = ({ item, user }: TeamItemProps) => {
   return (
     <div className="col gap-y-2.5">
       {isPending && <Loading message="공고를 종료하고 있습니다." />}
-
-      <div className="row">
+      <div className="row gap-x-2.5">
         <Link to={`/find/${item.id}/chat${isMyPost ? "" : `?cid=${user.uid}`}`}>
           <b>[{item?.isFinished ? `모집종료 - ${item.name}` : item.name}]</b>
-          {!item.isFinished && `${item.targets?.length}개의 직군을 찾고있음`}
-          {item.targets.length}개의 직군을 찾고 있음
+          {!item.isFinished && `${item.targets?.length}개의 직군을 찾고 있음`}
         </Link>
         {isMyPost && (
           <>
@@ -146,13 +144,12 @@ const TeamItem = ({ item, user }: TeamItemProps) => {
         )}
         <button onClick={onDelete}>삭제</button>
       </div>
-
       {isMyPost &&
         (!item?.isFinished ? (
           <div className="row gap-x-2.5 items-end">
             <Users.Component
               data={item.fid}
-              label="선택된 팀원"
+              label="선택할 팀원"
               onChangeSelect={(uid) => {
                 const found = fUsers.find((item) => item === uid);
                 setFUsers((prev) =>
@@ -162,10 +159,11 @@ const TeamItem = ({ item, user }: TeamItemProps) => {
               value={""}
             />
             {fUsers.length > 0 && (
-              <button onClick={onEnd} className="primary">
-                모집마감
+              <button className="primary" onClick={onEnd}>
+                모집 마감
               </button>
             )}
+            <button onClick={() => console.log(item)}>확인</button>
           </div>
         ) : (
           <button onClick={onRepost} className="primary">

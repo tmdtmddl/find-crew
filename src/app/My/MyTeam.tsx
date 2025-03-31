@@ -79,7 +79,7 @@ const MyTeam = (user: TeamUser) => {
   }
 
   return (
-    <div className="w-full">
+    <div>
       <h1>나와 매칭된 팀들</h1>
       <ul>
         {data.length > 0 ? (

@@ -43,11 +43,7 @@ const Team = (user: TeamUser) => {
           );
         }
 
-        if (!array) {
-          console.log("no data");
-          return [];
-        }
-        return data ?? [];
+        return array ?? [];
       } catch (error: any) {
         console.log(error);
         return [];

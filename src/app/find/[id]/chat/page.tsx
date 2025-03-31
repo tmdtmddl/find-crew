@@ -45,9 +45,7 @@ const ChatPage = (user: TeamUser) => {
   }, [data?.uid, user.uid]);
 
   const cid = useSearchParams()[0].get("cid");
-
   const navi = useNavigate();
-
   const { pathname } = useLocation();
 
   const [texts, setTexts] = useState<Chat[]>([]);
@@ -55,7 +53,7 @@ const ChatPage = (user: TeamUser) => {
   const listRef = useRef<HTMLLIElement>(null);
   const onFocus = useCallback(
     () => setTimeout(() => listRef.current?.scrollIntoView(), 100),
-    [listRef]
+    []
   );
 
   useEffect(() => {
@@ -80,9 +78,7 @@ const ChatPage = (user: TeamUser) => {
       return subMessages;
     }
   }, [params.id, cid]);
-  // 의존성어레이에 ref도 추가해야하지만 파이어베이스가 터져서 우선 빼놈
-
-  console.log(ref);
+  //   // 의존성어레이에 ref도 추가해야하지만 파이어베이스가 터져서 우선 빼놈
 
   // useEffect(() => {
   //   if (texts.length !== length) {
@@ -123,6 +119,7 @@ const ChatPage = (user: TeamUser) => {
         <h1>
           {data.name} - {data.targets.length}개의 직군 구함
         </h1>
+
         {data.fid.length > 0 ? (
           data.fid.map((cid) => (
             <button key={cid} onClick={() => navi(`${pathname}?cid=${cid}`)}>
@@ -130,7 +127,7 @@ const ChatPage = (user: TeamUser) => {
             </button>
           ))
         ) : (
-          <p>해당 공고를 스크랩한 유저가 존재하지 않습니다.</p>
+          <p>해당 공고를 스크랩 한 유저가 존재하지 않습니다.</p>
         )}
       </div>
     );

@@ -46,10 +46,6 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
     return subAuth;
   }, [fetchUser]);
 
-  // useEffect(() => {
-  //   console.log({ user });
-  // }, [user]);
-
   const signout = useCallback(
     (): PromiseResult =>
       new Promise((resolve) =>
@@ -142,10 +138,8 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
             if (!result.user) {
               return resolve({ message: "No such User" });
             }
-            //인증끝내고 데이터베이스에 저장
             const snap = await ref.doc(result.user.uid).get();
             const data = snap.data() as TeamUser;
-            //회원이 있으면
             if (data) {
               setUser(data);
               return resolve({
@@ -168,9 +162,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
   );
 
   const updateUser = useCallback(
-    async (
-      newUser: TeamUser
-    ): Promise<{ success: boolean; message?: string }> =>
+    async (newUser: TeamUser): PromiseResult =>
       new Promise((resolve) =>
         startTransition(async () => {
           try {
@@ -185,15 +177,14 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
     [user]
   );
 
-  const updataUserDetail = useCallback(
-    (
-      target: keyof TeamUser,
-      value: any
-    ): Promise<{ success: boolean; message?: string }> =>
+  const updateUserDetail = useCallback(
+    async (target: keyof TeamUser, value: any): PromiseResult =>
       new Promise((resolve) =>
         startTransition(async () => {
           try {
             await ref.doc(user?.uid).update({ [target]: value });
+
+            setUser((prev) => (prev ? { ...prev, [target]: value } : prev));
 
             resolve({ success: true });
           } catch (error: any) {
@@ -215,7 +206,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
         user,
         signinWithProvider,
         updateUser,
-        updataUserDetail,
+        updateUserDetail,
       }}
     >
       {children}

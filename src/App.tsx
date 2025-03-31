@@ -25,7 +25,7 @@ export default function App() {
           <h1 className="text-5xl">팀 매칭 앱</h1>
         </div>
       ) : (
-        <BrowserRouter basename={import.meta.env.DEV ? "/" : "find-crew"}>
+        <BrowserRouter basename={import.meta.env.DEV ? "/" : "/find-crew"}>
           <Routes>
             <Route path="/" element={<UserLayout user={user} />}>
               <Route index Component={HomePage} />

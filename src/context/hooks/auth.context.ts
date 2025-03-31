@@ -11,7 +11,7 @@ export interface Props {
   signup: (user: TeamUser, password: string, uid?: string) => PromiseResult;
 
   updateUser: (newUser: TeamUser) => PromiseResult;
-  updataUserDetail: (terget: keyof TeamUser, value: any) => PromiseResult;
+  updateUserDetail: (target: keyof TeamUser, value: any) => PromiseResult;
   signinWithProvider: () => PromiseResult<firebase.User>;
 }
 
@@ -23,8 +23,8 @@ export const initialState: Props = {
   signout: async () => ({}),
   signup: async () => ({}),
   updateUser: async () => ({}),
+  updateUserDetail: async () => ({}),
   signinWithProvider: async () => ({}),
-  updataUserDetail: async () => ({}),
   user: null,
 };
 

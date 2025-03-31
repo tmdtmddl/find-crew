@@ -28,7 +28,7 @@ const MyPage = (user: TeamUser) => {
           ))}
         </ul>
       </aside>
-      <div className="col">
+      <div className="flex-1">
         {content ? (
           {
             post: <Post {...user} />,
