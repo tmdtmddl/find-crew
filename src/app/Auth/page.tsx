@@ -428,6 +428,7 @@ export default function AuthPage() {
               </div>
             ),
           }[content]
+          // 객체에서 동적으로 값을 가져오는 방식
         )}
         <div className="row gap-x-2.5 mt-2.5">
           <button type="button" className="flex-1" onClick={() => navi(-1)}>
