@@ -68,7 +68,6 @@ const Post = (user: TeamUser) => {
 
   return (
     <div className="p-5">
-      {user.uid}
       <h1>매칭 진행 중인 팀 {data.length}개</h1>
       <ul className="col gap-y-2.5 my-5">
         {data.map((team) => (
