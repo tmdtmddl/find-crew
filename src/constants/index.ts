@@ -63,7 +63,7 @@ export const teams: MatchingTeam[] = [
     ],
     targets: ["개발자"],
     uid: "1001",
-    fid: "",
+    fid: [],
     id: "1",
   },
   {
@@ -88,7 +88,7 @@ export const teams: MatchingTeam[] = [
     ],
     targets: ["개발자", "디자이너"],
     uid: "1002",
-    fid: "",
+    fid: [],
     id: "2",
   },
   {
@@ -113,7 +113,7 @@ export const teams: MatchingTeam[] = [
     ],
     targets: ["개발자", "디자이너"],
     uid: "1003",
-    fid: "",
+    fid: [],
     id: "3",
   },
   {
@@ -134,7 +134,7 @@ export const teams: MatchingTeam[] = [
     ],
     targets: ["개발자", "개발자"],
     uid: "1004",
-    fid: "",
+    fid: [],
     id: "4",
   },
   {
@@ -160,7 +160,7 @@ export const teams: MatchingTeam[] = [
     ],
     targets: ["개발자", "디자이너"],
     uid: "1005",
-    fid: "",
+    fid: [],
     id: "5",
   },
   {
@@ -181,7 +181,7 @@ export const teams: MatchingTeam[] = [
     ],
     targets: ["개발자", "대표자"],
     uid: "1006",
-    fid: "",
+    fid: [],
     id: "6",
   },
   {
@@ -202,7 +202,7 @@ export const teams: MatchingTeam[] = [
     ],
     targets: ["개발자", "기획자", "디자이너"],
     uid: "1007",
-    fid: "",
+    fid: [],
     id: "7",
   },
   {
@@ -227,7 +227,7 @@ export const teams: MatchingTeam[] = [
     ],
     targets: ["디자이너", "개발자"],
     uid: "1008",
-    fid: "",
+    fid: [],
     id: "8",
   },
   {
@@ -253,7 +253,7 @@ export const teams: MatchingTeam[] = [
     ],
     targets: ["대표자"],
     uid: "1009",
-    fid: "",
+    fid: [],
     id: "9",
   },
   {
@@ -278,7 +278,7 @@ export const teams: MatchingTeam[] = [
     ],
     targets: ["기획자", "디자이너"],
     uid: "1010",
-    fid: "",
+    fid: [],
     id: "10",
   },
   {
@@ -299,7 +299,7 @@ export const teams: MatchingTeam[] = [
     ],
     targets: ["개발자", "디자이너"],
     uid: "1011",
-    fid: "",
+    fid: [],
     id: "11",
   },
   {
@@ -309,7 +309,7 @@ export const teams: MatchingTeam[] = [
     members: [initialUser],
     targets: ["디자이너"],
     uid: "123",
-    fid: "",
+    fid: [],
     id: "1",
   },
   {
@@ -319,7 +319,7 @@ export const teams: MatchingTeam[] = [
     members: [initialUser],
     targets: ["개발자"],
     uid: "1213",
-    fid: "",
+    fid: [],
     id: "2",
   },
   {
@@ -334,7 +334,7 @@ export const teams: MatchingTeam[] = [
     members: [initialUser],
     targets: ["개발자", "디자이너", "기획자"],
     uid: "1323",
-    fid: "",
+    fid: [],
     id: "3",
   },
   {
@@ -347,7 +347,7 @@ export const teams: MatchingTeam[] = [
     members: [initialUser],
     targets: ["기획자", "개발자"],
     uid: "1123",
-    fid: "",
+    fid: [],
     id: "4",
   },
 ];

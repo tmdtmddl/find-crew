@@ -46,7 +46,7 @@ export default function App() {
                   <>
                     <Route
                       path="matching-teams"
-                      element={<NewMatchingTeamPage {...user} />}
+                      element={<NewMatchingTeamPage />}
                     />
                   </>
                 )}

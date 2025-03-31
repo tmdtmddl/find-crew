@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { PROVIDER } from "../../context/zustand.store";
 
 const LoginPage = () => {
-  const { signin, signinWithProvider } = AUTH.use();
+  const { signin } = AUTH.use();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 

@@ -7,9 +7,8 @@ import { AUTH } from "../../../context/hooks";
 
 const AccountPage = (user: TeamUser) => {
   const [props, setProps] = useState(user);
-  const { isPending, updataUserDetail, updateUser } = AUTH.use();
-  const { email, experiences, intro, jobDesc, mobile, name, targets, uid } =
-    props;
+  const { isPending } = AUTH.use();
+  const { name } = props;
 
   const onChangeP = useCallback((target: keyof TeamUser, value: any) => {
     setProps((prev) => ({ ...prev, [target]: value }));

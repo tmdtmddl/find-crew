@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { TEAM } from "../../../context/zustand.store";
 import MatchingForm from "./MatchingForm";
 
-const NewMatchingTeam = (user: TeamUser) => {
+const NewMatchingTeam = () => {
   const { team, setTeam } = TEAM.store();
   const navi = useNavigate();
   return (
