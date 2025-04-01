@@ -1,54 +1,287 @@
-# React + TypeScript + Vite
+# 팀 매칭 프로젝트
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+1. 사이드 프로젝트를 하고 싶어하는 개발자가 많은데 어디서 팀원을 구해햐 할지 모름
 
-Currently, two official plugins are available:
+2. 디자인 아이디어는 많은데 상품 구현을 위한 개발자를 찾고 싶은 디자이너가 많음
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+3. 팀을 꾸리고 싶은 대표자들에게 인력을 연결해주는 서비스가 필요함
 
-## Expanding the ESLint configuration
+4. 무료로 이용하는 곳
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+5. 실무 경험을 쌓을 수 있고, 잘되면 들이 될수있는 프로젝틀르 할 수 있는 곳
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 필요 기능
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+1. 공고를 올릴 수 있어야함
+2. 공고를 찾아볼 수 있어야함
+3. 공고를 스크랩하고 팀매칭을 위한 문의 기능이 필요함
+4. 공고를 통해 지원자들을 선택할 수 있어야함
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 사용 스택
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+- Vite
+- React
+- tailwind css
+
+- react router dom
+
+- context Api
+- zustand
+
+- react query
+- firebase
+
+-react device detect
+
+#### 구현 페이지 및 기능
+
+1. 홈페이지
+
+   - 후킹 메세지와 함께 콜투액션 버튼 삽임함
+   - 상단 레이아웃에 홈으로 가는 제목 버튼
+   - 메뉴버튼 및 메뉴 창
+
+2. 로그인/회원가입
+
+   - 콜투액션에서 버튼을 클릭하면 해당 내용에 상응하는 찾는 대상의 주소값의 parameter를 사용하여 구현
+   - 개발자의 경우 디자이너와 기획자 그리고 대표자를 찾는 경우가 많은데 콜투 액션을 선택하면 디자이너,기획자,대표자를 미리..
+     **직군별로 상이하게 적용**
+   - react ..
+
+   - 회원가입 진행시 언제라도 로그인 할 수 있도록 아래 부분에 구글 로그인 또는 로그인창 아래 버튼을 마련해두었음
+
+   - 회원가입 / 로그인 폼의 인풋을 개별적인 메세지를 할당하여서 특정상황에 맞게끔 정확하게 동작하는 로직을 적용하였습니다.
+     예)..
+     **유저가 무엇을 해야하는 지 정확하게 알려줄 수 있음**
+
+   - 통합회원기능으로 팀매칭 프로겍트가 아닌 요구사항에서 로그인한 ... 로그인, 회원가입 등 로직이 씉나면 맞춤 페이지로 이동시킴
+
+   **당사에서 All-in-one 솔루션을 제공하는 경험을 얻을 수 있게 함**
+   초기 유저 풀 확보 가능
+
+   - 경력을 입력하기 위해 날짜를 선택할 수 있게 해둠
+   - 숫자만 입력해야하는 퇴사일을 현재까지라는 버튼을 선택하면 간단하게 처리할 수 있도록 기능 구현
+
+3. 팀 찾기
+
+   - 찾는 직군별..
+   - 해당 페이지에서...
+
+4. 공고 등록
+
+   - 회사명, 회사소개, 자격요건등을 적을 수 있음.
+   - 희망 직군 선택 가능
+   - 팀원 추가를 위해 이메일로 찾기 기능 구현
+
+5. 공고 디테일
+
+   - 매칭 시작 버튼으로 공고를 스크랩할 수 있음
+   - 자신의 공고는 스크랩 불가
+   - 공고를 올린 사람에게 스크랩한 사람의 아이디를 제공
+   - 문의하기 버튼 제공
+   - 공고제목을 보고 연락드린다 라는 메세지를 채팅의 첫마디로 시작자게끔 기능 구현 **웹소켓을 사용하지 않고 파이어베이스의 실시간리스너 기능으로 채팅 기능 구현**
+   - 채팅기능보다 팀원 매칭의 필요에 집중 ... **추후 웹소**
+
+6. 채팅 기능
+
+   - 파이어베이스 실시간 리스너로 구현
+   - 대화의 창은 누구의 것인지 구분하기 위해 채팅메세지에 본인의 아이디를 넣어둬서 구분
+   - 만들어진 시점을 기록하여 쿼리..
+   - 마지막 메세지에 ref를 연결하여 메세지를 입력했을 때 ...
+
+7. 나의 페이지
+
+   - 내가올린 공고
+
+     - 스크랩한 사람이 있다면 매칭을 진행할 팀원을 선택한 후 공고를 종료시킬 수 있음
+     - 추후 마감된 공고를 스크랩 하지 못하도록 기능 구현 예정
+     - 해당 공고를 삭제 하면 스크랩한 공고에도 마감처리가 되야하기 때문에 스크랩한 사람의 공고에 아이디만을 사용하여 최신 데이터를 가져오록 구현
+
+   - 매칭 진행중 공고
+
+     - 버튼 클릭시 ..
+
+   - 매칭완료
+
+     - 팀 탈퇴 시능 구현
+     - 해당 공고에서 나를 제외한 ...
+     - 팀원들과 소통을 위해 ...
+     - react-device-detect를 통해 ...
+     - android와 ios 기능구현 방법이 살짝 달랐기 때문에 마찬가지로 react-device-detect로 구현
+
+   - 환경설정
+     - 개인정보 변경
+     - 개별적으로 하나씩 ..
+       **작은 단위로 서버에 전송하는 것이 서버비용을 줄일 수 있다고 판단**
+       vs 수정내용을 전체적으로 전달(ex.수정버튼을 마지막에 만들어서)하는 것은 유저에세 수정하는 시점을 맡기면서 최종적인 결정이 났을 때에만 서버교류가 이루어질 수있음, 하지만 작성 중간에 이탈 시 새롭게 작성을 해야하는 부담이 유저에게 주어지는 문제가 있음.
+
+#### 기능 구현 스택 상세 설명
+
+1. firebase
+
+   - 새로고침을 할 때마다 데이터가 사라지기 때문에 보존을 하기위해서 데이터 베이스 용으로 활용
+
+   1. firestore
+
+   - 유저 데이터 ...
+
+   2. auth
+
+   - 로그인,....
+
+2. react-router-dom
+
+   1. 페이지구성, 하위페이지
+
+   - SPA(Single Page App)
+   - 뒤로가기,앞으로 가기,2번 내용 파악하여 사용하기 위함
+   - 다양한 컨텐츠를 담기 위해서
+   - 최소한의 컴포넌트 만을 사용하기 위해서
+
+   2. params,searchparams,location
+
+   - 파라미터 => 다이내믹 페이지에서 씀 예):id,:cid,:tid => useParams훅 사용, 제네릭 interface사용하기 (객체)
+   - ?뒤에 꼬리 붙은 친구들을 serchParams라고 부름 => useSearchPramas()[0].get("대상")사용 예)경로?대상=값
+   - location 현재 주소값으로 무언가를 할 때 사용
+   - searchParams값만 변경하고 싶을 때 현재 주소를 하드코딩... -현재 주소값으로 메뉴 등의 ...
+
+   3. 페이지간 이동
+
+   - useNavigate 훅 navi에 담아서 사용
+   - Link 태그
+   - Link vs a
+   - 새로고침을 안하려고, 최적화, 재렌더링 방지, 서버에서 데이터가져오는 거, HTML 페인팅 비용, 개발시 리셋방지
+   - 뒤로가기 구현 => navi(-1)
+
+3. context api/zustand
+
+   - 다른 페이지에서도 상태 공유
+   - props-drilling (1~2단계) 3단계 이상 되면 귀찮음, 반복적
+   - 리액트 훅 필요하면 context, 리액트 훅 필요 없으면 zustand
+   - context 3개이상의 스텝,컨테스트만들기,컨텍스트프로바이터 만들기,컴포넌트 감싸기
+   - zustand 1단계 끝.
+
+   ***
+
+   - 전역으로 써야되는 것들을 사용하기위해 cotext api랑 zustand를 사용하였음
+   - context는 리액트훅을 써서 사용해야하는 것들을 전역적으로 활용하기 위해서 사용
+   - zustand는 리액트훅을 쓰지 않아도 되는 것들을 context보다 쉽게 쓸 수 있기 때문에 사용
+
+4. react query
+
+   - 서버 데이터 관리 쿼리키로 등록
+   - 캐싱을 함 다른 페이지를 방문하더라도 같은 쿼리키로 등록된 데이터를 불러와야한다면 서버에 요청하는 것이 아니라 저장된 ....
+   - useState(로딩관리) + useEffect(페이지렌더링 되는 시점에서 호출)+Error핸들링
+     -react query는 다해줌
+     -sns, 매칭 등 데이터가 많이 쌓인다면 홈페이지에서 모든 데이터를 가져올 필요가 있는가? 20~4,50개정도를 제한 특정 조건을 만족할 때 다음 순서의 데이터를 가져올 수 있음 => 무한 스크롤 구현 가능
+   - 추가 수정 삭제 시 => 쿼리키로 등록된 데이터가 시간이 지나서 더이상 최신이 아니라고 알려줘야 함
+     ->쿼리클라이어트로 쿼리를 무효화 처리
+
+   ```javascript
+   const queryClient = useQueryClient()
+   ...
+   ```
+
+   ***
+
+   - 데이터베이스에서 데이터를 불러와서 캐싱을 해서 활용을 하기 위해서
+   - error,isPending등을 자동으로 할 수 있기 때문에
+
+5. react사용한 hook
+
+   1. useState
+
+   - 변경되는 값이 있으면 씀 제일 많이 씀
+   - 인
+   - 카
+   - CRUD
+   - 회원
+   - 스위치
+
+   - useActionState, useReducer도 있음 추후 공부예정
+
+   2. useEffect
+
+   - 파이어베이스에 실시간 리스너
+   - 실시간 리스너 때문에 다른데서 useEffect 못씀
+
+   - 일반 함수 vs 이펙트훅
+   - 일반함수는 유저가 **어떤동작을 수행 할 때** 작동
+   - 이펙트 훅은 **행동의 결과를 토대로 작동**
+
+   3. useRef
+
+   - reference 참조 요소 컨트롤 하는 법(모든 html태그, + 리액트 컴포넌트)
+   - useEffect로 감지하지 못함 실시간 업데이트가 눈에 보이지 않음 => 반응이 느림
+
+   3-1. useImperativeRef - 18버전은 ref 전달 3단계 거침 - 19버전은 2단계로 미묘하게 줄었음
+
+   4. useMemo
+
+   - memoization => 메모아이제이션
+     한글:메모이제이션 ,(상태등의)변수를 메모
+   - 메모리 한켠에 저장 (캐싱)
+   - 2번째 인자인 [] 안에 적어둔 변수, 함수...
+   - 리액트 컴포넌트는 하나의 유기체로 하나라도 변경되면 모든 내용들이 렌더링 됨
+
+   5. useCallback -함수를 메모해둠
+
+   - 4,5번 =>최적화
+
+   6. useTransition
+
+   - 비동기 함수랑 꿀 조합
+   - 비동기 함수를 쓰는 이유-> 서버에서 지연이 있기 때문에 함수가 동작하는 시간동안 다른 ...
+   - 18버전까지는 비동기함수 지원..
+
+   6-1. useOptimistic => 로딩 없이 그냥 질러버리고 ...
+
+   7. Suspense + lazy loading
+
+   - 만에 하나 리액트 컴포넌트가 너무커서 로딩(렌더링)이 오래걸릴 경우를 대비해서 로딩 창 구현
+
+   8. useContext => 3번
+
+   ***
+
+   - useEffect,useLocation,useRef
+
+   - 함수를 메모리제이션해서 사용하기 위해서 useCallback 그리고 함수의 값을 메모리제이션 하기 위해서 useMemo를 사용해서 최적화를 했음
+
+   - 변수를 활용하기 위해서 useState를 사용함
+
+   - useSearchParams,useParams를 사용해서 url의 값을 가져와서 그 값이 변경되거나 할때 조건부렌더링 같은 기능으로 활용함
+
+   - useNavigate를 이용해서 예로 navi라는 변수에 저장해서 그 변수를 가지고 이동을 쉽게 할수 있도록 활용을 했음.
+
+   - useTransition을 이용해서 로딩중일때랑 함수의 우선순위를 정해서 최적화가 될 수 있도록 만들었음
+
+   - Suspense + lazy loading을 이용해서 로딩할때를 관리하였음
+
+   - useContext => 3번
+
+# 부록
+
+0.모든 코드는 타입스크립트에서
+
+1. 코드 품질 개선
+
+- 코드리뷰(code-review):코드를 천천히 뜯어보는 과정
+- 리팩토링(re-factoring):리액트 훅을 충분히 이해 한뒤 기존 프로젝트들에 적용하기
+
+2. 새로운 프로젝트
+
+- 모든 훅 사용하기
+- 최대한많은 훅 사용하기
+- 리액트 훅..
+- 개편한 라이브러리..
+
+3. api 호출다루기
+   공공데이터 사용하기
+   tmdb api =>
+   pokemon api =>
+   api마다 호출법, 데이터 가공법이 다르다
+
+4. 테일윈드 뿐만 아니라 다른 스타일링 라이브러리도 사용해보기
+
+- 추천)vanila-extract -> 애니메이션, 변수대응
