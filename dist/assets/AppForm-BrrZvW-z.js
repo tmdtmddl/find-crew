@@ -1,1 +1,0 @@
-import{j as a,t as e}from"./index-DEwGXJKr.js";const u=t=>a.jsx("form",{...t,onSubmit:m=>{m.preventDefault(),t.onSubmit&&t.onSubmit(m)},className:e("max-w-100 mx-auto col gap-y-2.5 p-5",t==null?void 0:t.className)});export{u as A};
