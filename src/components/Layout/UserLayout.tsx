@@ -33,8 +33,8 @@ const UserLayout = ({ user }: { user: TeamUser | null }) => {
     <>
       <header
         className={twMerge(
-          " z-50 bg-white/90 border-b border-border fixed top-0 left-0 w-full "
-          // pathname === "/" ? "relative" : "fixed top-0 left-0 w-full"
+          " z-50 bg-white/90 border-b border-border fixed top-0 left-0 w-full ",
+          pathname === "/" ? "relative" : "fixed top-0 left-0 w-full"
         )}
       >
         <div className="max-w-300 mt-auto row justify-between p-2.5">
