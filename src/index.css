@@ -3,6 +3,7 @@
 @theme {
   --color-theme: var(--color-sky-500);
   --color-lightGray: var(--color-zinc-50);
+  --color-gray: var(--color-zinc-500);
   --color-border: var(--color-zinc-200);
   --color-bg: var(--color-white);
 }
@@ -11,22 +12,47 @@
   h1 {
     @apply font-black text-2xl;
   }
+
   .p {
     @apply font-light text-sm;
   }
-  button {
-    @apply bg-lightGray rounded p-2.5 h-10 cursor-pointer active:scale-98 focus:opacity-80  active:opacity-50 transition duration-75;
+
+  button,
+  a {
+    @apply bg-lightGray rounded p-2.5 h-10 cursor-pointer active:scale-98 focus:opacity-80 active:opacity-50 transition duration-75 flex justify-center items-center;
   }
+
   button.sd {
     @apply hover:shadow-md;
   }
-  button.primary {
+
+  .primary {
     @apply bg-theme text-white;
   }
+
   .row {
     @apply flex;
   }
+
   .col {
     @apply flex flex-col;
+  }
+
+  ul.wrap {
+    @apply flex flex-wrap gap-2.5;
+  }
+}
+
+@layer components {
+  .modal {
+    @apply fixed top-0 left-0 w-full h-screen;
+  }
+
+  .modal-bg {
+    @apply absolute top-0 left-0 w-full h-full;
+  }
+
+  .modal-content {
+    @apply relative z-10;
   }
 }

@@ -1,25 +1,19 @@
-import { useCallback, useRef } from "react";
+import { useCallback } from "react";
 import { HomeDesc, homeDescs } from "../../constants";
 import { useNavigate } from "react-router-dom";
 
-export function HomePage() {
+export default function HomePage() {
   const navi = useNavigate();
-  const bottom = useRef<HTMLDivElement>(null);
 
   const HomeItem = useCallback(
     ({ item }: ItemProps<HomeDesc>) => {
       return (
-        <div
-          className="col gap-y-5  justify-center snap-star min-h-screen items-center sm:items-start"
-          ref={item.title === "기획자라면" ? bottom : null}
-        >
+        <div className="col gap-y-5 justify-center snap-start min-h-screen items-center sm:items-start">
           <h1>{item.title}</h1>
           <p className="p">{item.subTitle}</p>
           <div className="row justify-center sm:justify-start">
             <button
-              onClick={() =>
-                navi(`/auth?target=${item.btnTitle}&context=기본정보`)
-              }
+              onClick={() => navi(`auth?target=${item.btnTitle}`)}
               className="sd primary"
             >
               {item.btnTitle}
@@ -32,7 +26,7 @@ export function HomePage() {
   );
 
   return (
-    <div className="px-5  snap-y snap-mandatory overflow-y-auto h-screen ">
+    <div className="px-5 snap-y snap-mandatory overflow-y-auto h-screen">
       {homeDescs.map((item, index) => (
         <HomeItem key={index} item={item} />
       ))}

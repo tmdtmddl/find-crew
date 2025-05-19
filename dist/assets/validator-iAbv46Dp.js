@@ -1,0 +1,1 @@
+const a=e=>e.length===0?!1:/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i.test(e),o=e=>e.length!==0,f=(e,t)=>{for(const r of e)if(!t.find(n=>n===r))return!1;return!0};export{a as e,f as i,o as l};
